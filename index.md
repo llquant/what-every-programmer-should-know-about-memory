@@ -1,6 +1,6 @@
-# CPU Memory 译文
+# What Every Programmer Should Know About Memory 译文
 
-本目录收录《What Every Programmer Should Know About Memory》的中文译文，内容覆盖现代商用硬件、CPU cache、虚拟内存、NUMA 支持，以及程序开发者可以采取的内存访问优化方法。
+本目录收录《What Every Programmer Should Know About Memory》（中文名称：《每个程序员都应该了解的内存知识》）的中文译文，内容覆盖现代商用硬件、CPU cache、虚拟内存、NUMA 支持，以及程序开发者可以采取的内存访问优化方法。
 
 ## 目录
 

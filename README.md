@@ -1,4 +1,4 @@
-# 每位程序开发者都该有的 memory 知识
+# 每个程序员都应该了解的内存知识
 
 本文翻译自 [Ulrich Drepper](https://de.wikipedia.org/wiki/Ulrich_Drepper) 于 2007 年撰写的论文《[What Every Programmer Should Know About Memory](https://www.akkadia.org/drepper/cpumemory.pdf)》(版次: 1.0)，原文共 114 页。
 
@@ -12,6 +12,6 @@
 > [!INFO]
 > 关于繁体中文翻译内容的修正、改进建议，和贡献，请访问 [sysprog21/cpumemory-zhtw](https://github.com/sysprog21/cpumemory-zhtw)
 
-简体转译：[LLQuant](https://github.com/llquant)，使用GPT 5.5转译，并使用Opus 4.8 校验转译结果。
-[仓库地址](https://github.com/llquant/what-every-programmer-should-know-about-memory.git) 
+简体转译：[LLQuant](https://github.com/llquant)，使用GPT 5.5转译，并使用Opus 4.8 校验转译结果。  
+[llquant/what-every-programmer-should-know-about-memory](https://github.com/llquant/what-every-programmer-should-know-about-memory.git) 
 
