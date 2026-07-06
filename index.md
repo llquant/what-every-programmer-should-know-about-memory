@@ -1,0 +1,36 @@
+# CPU Memory 译文
+
+本目录收录《What Every Programmer Should Know About Memory》的中文译文，内容覆盖现代商用硬件、CPU cache、虚拟内存、NUMA 支持，以及程序开发者可以采取的内存访问优化方法。
+
+## 目录
+
+- [0. 关于](/resources/cpumemory/README)
+- [1. 引言](/resources/cpumemory/introduction)
+- [2. 现代商用硬件](/resources/cpumemory/commodity-hardware-today)
+  - [2.1. RAM 的种类](/resources/cpumemory/commodity-hardware-today/ram-types)
+  - [2.2. DRAM 访问技术细节](/resources/cpumemory/commodity-hardware-today/dram-access-technical-details)
+  - [2.3. 其他主 memory 用户](/resources/cpumemory/commodity-hardware-today/other-main-memory-users)
+- [3. CPU cache](/resources/cpumemory/cpu-caches)
+  - [3.1. 概观 CPU cache](/resources/cpumemory/cpu-caches/cpu-caches-in-the-big-picture)
+  - [3.2. 高层 cache 操作](/resources/cpumemory/cpu-caches/cache-operation-at-high-level)
+  - [3.3. CPU cache 实现细节](/resources/cpumemory/cpu-caches/cpu-cache-implementation-details)
+  - [3.4. 指令 cache](/resources/cpumemory/cpu-caches/instruction-cache)
+  - [3.5. cache 错失的因素](/resources/cpumemory/cpu-caches/cache-miss-factors)
+- [4. 虚拟 memory](/resources/cpumemory/virtual-memory)
+  - [4.1. 最简单的地址转换](/resources/cpumemory/virtual-memory/simplest-address-translation)
+  - [4.2. 多层次页表](/resources/cpumemory/virtual-memory/multi-level-page-tables)
+  - [4.3. 优化页表访问](/resources/cpumemory/virtual-memory/optimizing-page-table-access)
+  - [4.4. 虚拟化的影响](/resources/cpumemory/virtual-memory/impact-of-virtualization)
+- [5. NUMA 支持](/resources/cpumemory/numa-support)
+  - [5.1. NUMA 硬件](/resources/cpumemory/numa-support/numa-hardware)
+  - [5.2. 操作系统对 NUMA 的支持](/resources/cpumemory/numa-support/os-support-for-numa)
+  - [5.3. 发布的信息](/resources/cpumemory/numa-support/published-information)
+  - [5.4. 远程访问成本](/resources/cpumemory/numa-support/remote-access-costs)
+- [6. 程序开发者能做些什么？](/resources/cpumemory/what-programmers-can-do)
+  - [6.1. 绕过 cache](/resources/cpumemory/what-programmers-can-do/bypassing-the-cache)
+  - [6.2. cache 访问](/resources/cpumemory/what-programmers-can-do/cache-access)
+  - [6.3. 预取](/resources/cpumemory/what-programmers-can-do/prefetching)
+  - [6.4. 多线程优化](/resources/cpumemory/what-programmers-can-do/multi-thread-optimizations)
+  - [6.5. NUMA 程序设计](/resources/cpumemory/what-programmers-can-do/numa-programming)
+- [A. 范例与基准测试程序](/resources/cpumemory/examples-and-benchmark-programs)
+- [参考书目](/resources/cpumemory/bibliography)

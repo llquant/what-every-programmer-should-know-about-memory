@@ -1,0 +1,19 @@
+# 3.5.2. 关键 word 的加载
+
+memory 以比 cache 行大小还小的区块从主 memory 传输到 cache 中。如今是一次传输 64 *bit*，而 cache 行的大小为 64 或 128 *byte*。这表示每个 cache 行需要 8 或 16 次传输。
+
+DRAM 芯片可以用突发（burst）模式传输那些 64 byte 的区块。这可以在没有来自 memory 控制器的额外命令、以及可能伴随的延迟的情况下填满 cache 行。若是处理器预取 cache 行，这可能是最好的操作方式。
+
+若是一支程序的数据或 cache 访问没有命中（这表示，这是个强制性 cache 错失〔compulsory cache miss〕–– 因为数据是第一次使用、或者是容量性 cache 错失〔capacity cache miss〕–– 因为受限的 cache 大小需要逐出 cache 行），情况便不同。程序继续执行所需的 cache 行里头的 word 也许不是 cache 行中的第一个 word。即使在突发模式下、并以双倍数据速率来传输，个别的 64 bit 区块也会在明显不同的时间点抵达。每个区块会在前一个区块抵达之后 4 个 CPU 周期以上抵达。若是程序继续执行所需的 word 是 cache 行的第八个，程序就必须在第一个 word 抵达之后，等待额外的 30 个周期以上。
+
+事情并不必然非得如此。memory 控制器可以用不同的顺序随意请求 cache 行的 word。处理器可以传达程序正在等待哪个 word –– 即*关键 word*，而 memory 控制器可以先请求这个 word。一旦这个 word 抵达，程序便可以在 cache 行其余部分抵达、并且 cache 还不在一致状态的期间继续执行。这个技术被称为关键 word 优先与提早重新启动（Critical Word First & Early Restart）。
+
+如今的处理器实现这项技术，但有些不可能达成的情况。若是处理器预取数据，并且关键 word 是未知的。万一处理器在预取操作的途中请求这个 cache 行，就必须在不可以影响顺序的情况下，一直等到关键 word 抵达为止。
+
+<figure>
+  <img src="../../assets/figure-3.30.png" alt="图 3.30：在 cache 行末端的关键 word">
+  <figcaption>图 3.30：在 cache 行末端的关键 word</figcaption>
+</figure>
+
+即使在适当的地方有了这些优化，关键 word 在 cache 行的位置也很重要。图 3.30 显示顺序与随机访问的 Follow 测试结果。显示的是以用来遍历的指针位在第一个 word 来执行测试，对比指针位在最后一个 word 的情况下的速度减慢的结果。元素大小为 64 byte，与 cache 行的大小一致。数字受到许多杂讯干扰，但可以看到，一旦 L2 不再足以持有工作集大小，关键 word 在末端时的性能立刻就慢约 0.7%。顺序访问似乎受到多一点影响。这与前面提及的、预取下个 cache 行时的问题一致。
+
