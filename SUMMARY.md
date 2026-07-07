@@ -11,10 +11,10 @@
     * [2.2. DRAM 访问技术细节](commodity-hardware-today/dram-access-technical-details.md)
         * [2.2.1. 读取协议](commodity-hardware-today/dram-access-technical-details/read-access-protocol.md)
         * [2.2.2. 预充电与激活](commodity-hardware-today/dram-access-technical-details/precharge-and-activation.md)
-        * [2.2.3. 再充电](commodity-hardware-today/dram-access-technical-details/recharging.md)
-        * [2.2.4. memory 类型](commodity-hardware-today/dram-access-technical-details/memory-types.md)
+        * [2.2.3. 刷新](commodity-hardware-today/dram-access-technical-details/recharging.md)
+        * [2.2.4. 内存类型](commodity-hardware-today/dram-access-technical-details/memory-types.md)
         * [2.2.5. 结论](commodity-hardware-today/dram-access-technical-details/conclusions.md)
-    * [2.3. 其他主 memory 用户](commodity-hardware-today/other-main-memory-users.md)
+    * [2.3. 其他主内存用户](commodity-hardware-today/other-main-memory-users.md)
 * [3. CPU cache](cpu-caches.md)
     * [3.1. 概观 CPU cache](cpu-caches/cpu-caches-in-the-big-picture.md)
     * [3.2. 高层 cache 操作](cpu-caches/cache-operation-at-high-level.md)
@@ -72,4 +72,3 @@
 * [A. 范例与基准测试程序](examples-and-benchmark-programs.md)
     * [A.1 矩阵乘法](examples-and-benchmark-programs/matrix-multiplication.md)
 * [参考书目](bibliography.md)
-
