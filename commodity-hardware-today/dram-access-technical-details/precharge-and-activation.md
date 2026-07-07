@@ -2,10 +2,9 @@
 
 图 2.8 没有覆盖整个周期。它只显示了访问 DRAM 的完整周期中的一部分。在可以发送新的 $\overline{\text{RAS}}$ 信号之前，当前锁存的行必须被停用（deactivate），新行也必须被预充电（precharge）。这里我们只关注通过显式命令完成这一步的情况。协议中有一些改进可以在某些情况下避免这个额外步骤。不过，预充电引入的延迟仍然会影响操作。
 
-<figure>
-  <img src="../../assets/figure-2.9.png" alt="图 2.9：SDRAM 预充电与激活">
-  <figcaption>图 2.9：SDRAM 预充电与激活</figcaption>
-</figure>
+![图 2.9：SDRAM 预充电与激活](../../assets/figure-2.9.png)
+
+*图 2.9：SDRAM 预充电与激活*
 
 图 2.9 展示了从一个 $\overline{\text{CAS}}$ 信号开始，到另一个行的 $\overline{\text{CAS}}$ 信号为止的活动。和之前一样，第一个 $\overline{\text{CAS}}$ 信号请求的数据会在 CL 个周期后可用。在这个例子中，请求了两个数据字；在简单的 SDRAM 上，传输它们需要两个周期。也可以把它想象成 DDR 芯片上传输四个数据字。
 

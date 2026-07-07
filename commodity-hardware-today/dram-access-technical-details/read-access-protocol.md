@@ -1,9 +1,8 @@
 # 2.2.1. 读取协议
 
-<figure>
-  <img src="../../assets/figure-2.8.png" alt="图 2.8：SDRAM 读取时序">
-  <figcaption>图 2.8：SDRAM 读取时序</figcaption>
-</figure>
+![图 2.8：SDRAM 读取时序](../../assets/figure-2.8.png)
+
+*图 2.8：SDRAM 读取时序*
 
 图 2.8 显示了 DRAM 模块上一些连接器的活动，这些活动发生在三个以不同颜色标出的阶段中。像往常一样，时间从左向右流动。许多细节被省略了；这里我们只讨论总线时钟、$\overline{\text{RAS}}$ 与 $\overline{\text{CAS}}$ 信号，以及地址总线和数据总线。读取周期开始时，内存控制器会把行地址放到地址总线上，并拉低 $\overline{\text{RAS}}$ 信号。所有信号都会在时钟（CLK）的上升沿（rising edge）读取，因此只要信号在被读取时稳定，即使并非完全方波也没有关系。设置行地址会使 RAM 芯片开始锁存（latch）被寻址的行。
 

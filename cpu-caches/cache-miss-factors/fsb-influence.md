@@ -1,9 +1,8 @@
 # 3.5.4. FSB 的影响
 
-<figure>
-  <img src="../../assets/figure-3.32.png" alt="图 3.32：FSB 速度的影响">
-  <figcaption>图 3.32：FSB 速度的影响</figcaption>
-</figure>
+![图 3.32：FSB 速度的影响](../../assets/figure-3.32.png)
+
+*图 3.32：FSB 速度的影响*
 
 FSB 在机器的性能中扮演一个重要的角色。cache 内容只能以跟 memory 的连线所允许的一样快地被存储与写入。我们可以通过在两台仅在 memory 模块速度上有差异的机器上执行一支程序，来看看到底怎么样。图 3.32 显示以一台 64 bit 机器、`NPAD`=7 而言，Addnext0 测试（将下一个元素的 `pad[0]` 元素加到自己的 `pad[0]` 元素上）的结果。两台机器都拥有 Intel Core 2 处理器，第一台使用 667MHz DDR2 模块，第二台则是 800MHz 模块（提升 20%）。
 

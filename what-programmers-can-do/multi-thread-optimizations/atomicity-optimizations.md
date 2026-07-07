@@ -38,45 +38,18 @@ do {
 
 这里我们必须使用一个特殊的加载指令（`LL`），而且我们不必将 memory 位置的目前值传递给 `SC`，因为处理器知道 memory 位置是否曾在这期间被修改过。
 
-<figure>
-  <table>
-    <tr>
-      <td><pre><code>for (i = 0; i < N; ++i)
-  __sync_add_and_fetch(&var,1);</code></pre></td>
-      <td><pre><code>for (i = 0; i < N; ++i)
-  __sync_fetch_and_add(&var,1);</code></pre></td>
-      <td><pre><code>for (i = 0; i < N; ++i) {
-  long v, n;
-  do {
-    v = var;
-    n = v + 1;
-  } while (!__sync_bool_compare_and_swap(&var, v,n));
-}</code></pre></td>
-    </tr>
-    <tr>
-      <th>1. 做加法并读取结果</th>
-      <th>2. 做加法并返回旧值</th>
-      <th>3.  atomic 地以新值替换</th>
-    </tr>
-  </table>
-  <figcaption>图 6.12：在一个循环中 atomic 递增</figcaption>
-</figure>
+| 1. 做加法并读取结果 | 2. 做加法并返回旧值 | 3. atomic 地以新值替换 |
+| --- | --- | --- |
+| `for (i = 0; i < N; ++i)`<br>` __sync_add_and_fetch(&var,1);` | `for (i = 0; i < N; ++i)`<br>` __sync_fetch_and_add(&var,1);` | `for (i = 0; i < N; ++i) {`<br>` long v, n;`<br>` do {`<br>` v = var;`<br>` n = v + 1;`<br>` } while (!__sync_bool_compare_and_swap(&var, v,n));`<br>`}` |
+
+*图 6.12：在一个循环中 atomic 递增*
 
 主要差异出现在 x86 与 x86-64 上：这些架构提供多种 atomic 操作，因此必须选择合适的 atomic 操作，才能获得最佳结果。
 图 6.12 显示实现一个 atomic 递增操作的三种方法。在 x86 与 x86-64 上，三种方法全都会产生不同的程序，而在其他的架构上，程序则可能完全相同。性能的差异很大。下面的表格显示由四条并行的线程进行 1 百万次递增的执行时间。程序使用 gcc 的内建函数（`__sync_*`）
 
-<table>
-  <tr>
-    <th>1. Exchange Add</th>
-    <th>2. Add Fetch</th>
-    <th>3. CAS</th>
-  </tr>
-  <tr>
-    <td>0.23s</td>
-    <td>0.21s</td>
-    <td style="background: yellow">0.73s</td>
-  </tr>
-</table>
+| 1. Exchange Add | 2. Add Fetch | 3. CAS |
+| --- | --- | --- |
+| 0.23s | 0.21s | 0.73s |
 
 前两个数字很相近；我们看到返回旧值稍微快一点。重要的信息在被强调的那一栏，使用 CAS 时的成本。毫不意外，它要昂贵许多。对此有诸多理由
 1. 有两个 memory 操作;
@@ -85,33 +58,12 @@ do {
 
 现在读者可能会问个问题：为什么有人会使用这种利用 CAS 的复杂、而且较长的程序？对此的回答是：复杂性通常会被隐藏。如同先前提过的，CAS 是横跨所有有趣架构的统一 atomic 操作。所以有些人认为，以 CAS 定义所有的 atomic 操作就足够。这令程序更为简单。但就如数字所显示的，这绝对不是最好的结果。CAS 解法的 memory 管理的间接成本很大。下面示意仅有两条线程的执行，每条在它们自己的处理器核上。
 
-<table>
-  <tr>
-    <th>线程 #1</th>
-    <th>线程 #2</th>
-    <th>var cache 状态</th>
-  </tr>
-  <tr>
-    <td><code>v = var</code></td>
-    <td></td>
-    <td>在 Proc 1 上为「E」</td>
-  </tr>
-  <tr>
-    <td><code>n = v + 1</code></td>
-    <td><code>v = var</code></td>
-    <td>在 Proc 1+2 上为「S」</td>
-  </tr>
-  <tr>
-    <td>CAS(<code>var</code>)</td>
-    <td><code>n = v + 1</code></td>
-    <td>在 Proc 1 上为「E」</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td>CAS(<code>var</code>)</td>
-    <td>在 Proc 2 上为「E」</td>
-  </tr>
-</table>
+| 线程 #1 | 线程 #2 | var cache 状态 |
+| --- | --- | --- |
+| `v = var` |  | 在 Proc 1 上为「E」 |
+| `n = v + 1` | `v = var` | 在 Proc 1+2 上为「S」 |
+| CAS(`var`) | `n = v + 1` | 在 Proc 1 上为「E」 |
+|  | CAS(`var`) | 在 Proc 2 上为「E」 |
 
 我们看到，在这段很短的运行期间内，cache 行状态至少改变三次；两次改变为 RFO。再加上，因为第二个 CAS 会失败，所以这条线程必须重复整个操作。在这个操作的期间，相同的情况可能会再度发生。
 
@@ -136,7 +88,6 @@ do {
 如果这段组合语言程序看起来很神秘，别担心，它很简单的。第一个指令检查一个变量是否为零。非零在这个情况中表示有多于一条执行中的线程。若是这个值为零，第二个指令就会跳到标签 `1`。否则，就执行下一个指令。这就是狡猾的部分。若是 `je` 没有跳跃，`add` 指令便会以 `lock` 前缀执行。否则，它会在没有 `lock` 前缀的情况下执行。
 
 增加像是条件跳跃这样一个潜在昂贵的操作（在分支预测错误的情况下是很昂贵的）看似事与愿违。确实可能如此：若是大多时候都有多条线程在执行中，性能会进一步降低，尤其在分支预测不正确的情况。但若是有许多仅有一条线程在使用中的情况，程序是明显比较快的。使用一个 if-then-else 构造的替代方法在两种情况下都会引入额外的非条件跳跃，这可能更慢。假定一次 atomic 操作花费大约 200 个周期，使用这个技巧（或是 if-then-else 区块）的交叉点是相当低的。这肯定是个要记在心上的技术。不幸的是，这表示无法使用 gcc 的 `__sync_*` 内建函数。
-
 
 
 [^40]: HP Parisc 仍然没有提供更多的操作...

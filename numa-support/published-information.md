@@ -6,93 +6,22 @@
 
 在 6.2.1 节，我们会看到能用来查询不同 cache 大小的接口。这里重要的是 cache 的拓朴。上面的目录包含了列出 CPU 拥有的不同 cache 信息的子目录（叫做 `index*`）。文件 `type`、`level`、与 `shared_cpu_map` 是在这些目录中与拓朴有关的重要文件。一个 Intel Core 2 QX6700 的信息看起来就如表 5.1。
 
-<figure>
-  <table>
-    <tr>
-      <th colspan="2"></th>
-      <th><code>type</code></th>
-      <th><code>level</code></th>
-      <th><code>shared_cpu_map</code></th>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu0</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000001</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000001</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>00000003</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu1</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000002</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000002</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>00000003</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu2</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000004</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000004</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>0000000c</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu3</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000008</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000008</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>0000000c</td>
-    </tr>
-  </table>
-  <figcaption>表 5.1：Core 2 CPU cache 的 <code>sysfs</code> 信息</figcaption>
-</figure>
+|  |  | `type` | `level` | `shared_cpu_map` |
+| --- | --- | --- | --- | --- |
+| `cpu0` | `index0` | Data | 1 | 00000001 |
+| `cpu0` | `index1` | Instruction | 1 | 00000001 |
+| `cpu0` | `index2` | Unified | 2 | 00000003 |
+| `cpu1` | `index0` | Data | 1 | 00000002 |
+| `cpu1` | `index1` | Instruction | 1 | 00000002 |
+| `cpu1` | `index2` | Unified | 2 | 00000003 |
+| `cpu2` | `index0` | Data | 1 | 00000004 |
+| `cpu2` | `index1` | Instruction | 1 | 00000004 |
+| `cpu2` | `index2` | Unified | 2 | 0000000c |
+| `cpu3` | `index0` | Data | 1 | 00000008 |
+| `cpu3` | `index1` | Instruction | 1 | 00000008 |
+| `cpu3` | `index2` | Unified | 2 | 0000000c |
+
+*表 5.1：Core 2 CPU cache 的 `sysfs` 信息*
 
 这份数据的意义如下：
 
@@ -102,169 +31,34 @@
 
 若是 CPU 有更多 cache 阶层，也会有更多的 `index*` 目录。
 
-<figure>
-  <table>
-    <tr>
-      <th colspan="2"></th>
-      <th><code>type</code></th>
-      <th><code>level</code></th>
-      <th><code>shared_cpu_map</code></th>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu0</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000001</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000001</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>00000001</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu1</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000002</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000002</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>00000002</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu2</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000004</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000004</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>00000004</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu3</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000008</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000008</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>00000008</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu4</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000010</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000010</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>00000010</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu5</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000020</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000020</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>00000020</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu6</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000040</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000040</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>00000040</td>
-    </tr>
-    <tr>
-      <td rowspan="3"><code>cpu7</code></td>
-      <td><code>index0</code></td>
-      <td>Data</td>
-      <td>1</td>
-      <td>00000080</td>
-    </tr>
-    <tr>
-      <td><code>index1</code></td>
-      <td>Instruction</td>
-      <td>1</td>
-      <td>00000080</td>
-    </tr>
-    <tr>
-      <td><code>index2</code></td>
-      <td>Unified</td>
-      <td>2</td>
-      <td>00000080</td>
-    </tr>
-  </table>
-  <figcaption>表 5.2：Opteron CPU cache 的 <code>sysfs</code> 信息</figcaption>
-</figure>
+|  |  | `type` | `level` | `shared_cpu_map` |
+| --- | --- | --- | --- | --- |
+| `cpu0` | `index0` | Data | 1 | 00000001 |
+| `cpu0` | `index1` | Instruction | 1 | 00000001 |
+| `cpu0` | `index2` | Unified | 2 | 00000001 |
+| `cpu1` | `index0` | Data | 1 | 00000002 |
+| `cpu1` | `index1` | Instruction | 1 | 00000002 |
+| `cpu1` | `index2` | Unified | 2 | 00000002 |
+| `cpu2` | `index0` | Data | 1 | 00000004 |
+| `cpu2` | `index1` | Instruction | 1 | 00000004 |
+| `cpu2` | `index2` | Unified | 2 | 00000004 |
+| `cpu3` | `index0` | Data | 1 | 00000008 |
+| `cpu3` | `index1` | Instruction | 1 | 00000008 |
+| `cpu3` | `index2` | Unified | 2 | 00000008 |
+| `cpu4` | `index0` | Data | 1 | 00000010 |
+| `cpu4` | `index1` | Instruction | 1 | 00000010 |
+| `cpu4` | `index2` | Unified | 2 | 00000010 |
+| `cpu5` | `index0` | Data | 1 | 00000020 |
+| `cpu5` | `index1` | Instruction | 1 | 00000020 |
+| `cpu5` | `index2` | Unified | 2 | 00000020 |
+| `cpu6` | `index0` | Data | 1 | 00000040 |
+| `cpu6` | `index1` | Instruction | 1 | 00000040 |
+| `cpu6` | `index2` | Unified | 2 | 00000040 |
+| `cpu7` | `index0` | Data | 1 | 00000080 |
+| `cpu7` | `index1` | Instruction | 1 | 00000080 |
+| `cpu7` | `index2` | Unified | 2 | 00000080 |
+
+*表 5.2：Opteron CPU cache 的 `sysfs` 信息*
 
 对于一个四槽、双核的 Opteron 机器，cache 信息看起来如表 5.2。可以看出这些处理器也有三种 cache ：L1i、L1d、L2。没有处理器核共享任何阶层的 cache。这个系统有趣的部分在于处理器拓朴。少了这个额外信息，就无法理解 cache 数据。`sys` 文件系统将这个信息摆在下面这个文件
 
@@ -272,70 +66,18 @@
 
 表 5.3 显示了在 SMP Opteron 机器的这个阶层里头的令人感兴趣的文件。
 
-<figure>
-  <table>
-    <tr>
-      <th></th>
-      <th><code>physical_<br />package_id</code></th>
-      <th><code>core_id</code></th>
-      <th><code>core_<br />siblings</code></th>
-      <th><code>thread_<br />siblings</code></th>
-    </tr>
-    <tr>
-      <td><code>cpu0</code></td>
-      <td rowspan="2">0</td>
-      <td>0</td>
-      <td>00000003</td>
-      <td>00000001</td>
-    </tr>
-    <tr>
-      <td><code>cpu1</code></td>
-      <td>1</td>
-      <td>00000003</td>
-      <td>00000002</td>
-    </tr>
-    <tr>
-      <td><code>cpu2</code></td>
-      <td rowspan="2">1</td>
-      <td>0</td>
-      <td>0000000c</td>
-      <td>00000004</td>
-    </tr>
-    <tr>
-      <td><code>cpu3</code></td>
-      <td>1</td>
-      <td>0000000c</td>
-      <td>00000008</td>
-    </tr>
-    <tr>
-      <td><code>cpu4</code></td>
-      <td rowspan="2">2</td>
-      <td>0</td>
-      <td>00000030</td>
-      <td>00000010</td>
-    </tr>
-    <tr>
-      <td><code>cpu5</code></td>
-      <td>1</td>
-      <td>00000030</td>
-      <td>00000020</td>
-    </tr>
-    <tr>
-      <td><code>cpu6</code></td>
-      <td rowspan="2">3</td>
-      <td>0</td>
-      <td>000000c0</td>
-      <td>00000040</td>
-    </tr>
-    <tr>
-      <td><code>cpu7</code></td>
-      <td>1</td>
-      <td>000000c0</td>
-      <td>00000080</td>
-    </tr>
-  </table>
-  <figcaption>表 5.3：Opteron CPU 拓朴的 <code>sysfs</code> 信息</figcaption>
-</figure>
+|  | `physical_<br>package_id` | `core_id` | `core_<br>siblings` | `thread_<br>siblings` |
+| --- | --- | --- | --- | --- |
+| `cpu0` | 0 | 0 | 00000003 | 00000001 |
+| `cpu1` | 0 | 1 | 00000003 | 00000002 |
+| `cpu2` | 1 | 0 | 0000000c | 00000004 |
+| `cpu3` | 1 | 1 | 0000000c | 00000008 |
+| `cpu4` | 2 | 0 | 00000030 | 00000010 |
+| `cpu5` | 2 | 1 | 00000030 | 00000020 |
+| `cpu6` | 3 | 0 | 000000c0 | 00000040 |
+| `cpu7` | 3 | 1 | 000000c0 | 00000080 |
+
+*表 5.3：Opteron CPU 拓朴的 `sysfs` 信息*
 
 将表 5.2 与 5.3 摆在一起，我们可以发现
 
@@ -352,36 +94,14 @@
 
 这个目录包含在系统上的每个 NUMA 节点的子目录。在特定节点的目录中有许多文件。在前两张表中描述的 Opteron 机器的重要文件与它们的内容显示在表 5.4。
 
-<figure>
-  <table>
-    <tr>
-      <th></th>
-      <th><code>cpumap</code></th>
-      <th><code>distance</code></th>
-    </tr>
-    <tr>
-      <td><code>node0</code></td>
-      <td>00000003</td>
-      <td>10 20 20 20</td>
-    </tr>
-    <tr>
-      <td><code>node0</code></td>
-      <td>0000000c</td>
-      <td>20 10 20 20</td>
-    </tr>
-    <tr>
-      <td><code>node2</code></td>
-      <td>00000030</td>
-      <td>20 20 10 20</td>
-    </tr>
-    <tr>
-      <td><code>node3</code></td>
-      <td>000000c0</td>
-      <td>20 20 20 10</td>
-    </tr>
-  </table>
-  <figcaption>表 5.4：Opteron 节点的 <code>sysfs</code> 信息</figcaption>
-</figure>
+|  | `cpumap` | `distance` |
+| --- | --- | --- |
+| `node0` | 00000003 | 10 20 20 20 |
+| `node0` | 0000000c | 20 10 20 20 |
+| `node2` | 00000030 | 20 20 10 20 |
+| `node3` | 000000c0 | 20 20 20 10 |
+
+*表 5.4：Opteron 节点的 `sysfs` 信息*
 
 这个信息将所有的一切连系在一起；现在我们有个机器架构的完整轮廓了。我们已经知道机器拥有四个处理器。每个处理器构成它自己的节点，可以从 `node*` 目录的 `cpumap` 文件中的值里头设置的 bit 看出来。在那些目录的 `distance` 文件包含一组值，一个值代表一个节点，表示在各个节点上访问 memory 的成本。在这个例子中，所有本地 memory 访问的成本为 10，所有对任何其他节点的远程访问的成本为 20。[^26]这表示，即使处理器被组织成一个二维超立方体（见图 5.1），在没有直接连接的处理器之间访问也没有比较贵。成本的相对值应该能用来作为访问时间的实际差距的估计。所有这些信息的准确性是另一个问题了。
 

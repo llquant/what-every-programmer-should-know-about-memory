@@ -1,9 +1,8 @@
 # 2.1.1. 静态 RAM
 
-<figure>
-  <img src="../../assets/figure-2.4.png" alt="图 2.4：6-T 静态 RAM">
-  <figcaption>图 2.4：6-T 静态 RAM</figcaption>
-</figure>
+![图 2.4：6-T 静态 RAM](../../assets/figure-2.4.png)
+
+*图 2.4：6-T 静态 RAM*
 
 图 2.4 展示了一个由 6 个晶体管（transistor）构成的 SRAM 存储单元（cell）的结构。这个存储单元的核心由四个晶体管 $\mathbf{M_{1}}$ 到 $\mathbf{M_{4}}$ 构成，它们形成两个交叉耦合（cross-coupled）的反相器（inverter）。它们有两个稳定状态，分别表示 0 与 1。只要 $\mathbf{V_{dd}}$ 上有电源供电，状态就是稳定的。
 

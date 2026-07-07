@@ -6,17 +6,15 @@ Intel 已经在它们的芯片组与 CPU 中加上技术以缓解这个问题 [1
 
 网络 I/O 硬件已有 DMA 以写入封包。这表示它直接地与潜在整合在北桥中的 memory 控制器进行沟通。memory 控制器的另一边是通过 FSB 到处理器的接口（假设 memory 控制器没有被整合到 CPU 自身）。
 
-<figure>
-  <figure class="sub-figure">
-    <img src="../../assets/figure-6.9a.png" alt="(a) 启动 DMA">
-    <figcaption>(a) 启动 DMA</figcaption>
-  </figure>
-  <figure class="sub-figure">
-    <img src="../../assets/figure-6.9b.png" alt="(b) 执行 DMA 与 DCA">
-    <figcaption>(b) 执行 DMA 与 DCA</figcaption>
-  </figure>
-  <figcaption>图 6.9：直接 cache 访问</figcaption>
-</figure>
+![(a) 启动 DMA](../../assets/figure-6.9a.png)
+
+*(a) 启动 DMA*
+
+![(b) 执行 DMA 与 DCA](../../assets/figure-6.9b.png)
+
+*(b) 执行 DMA 与 DCA*
+
+*图 6.9：直接 cache 访问*
 
 直接 cache 访问（Direct Cache Access，DCA）背后的想法是，扩充 NIC 与 memory 控制器之间的通讯协议。在图 6.9 中，第一张图显示在一台有着南北桥的正规机器上的 DMA 传输的起始。NIC 被连接到南桥上（或作为其一部分）。它启动 DMA 访问，但提供关于封包头的新信息，其应该被推进处理器的 cache 中。
 

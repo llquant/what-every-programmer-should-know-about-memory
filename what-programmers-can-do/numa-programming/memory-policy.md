@@ -12,10 +12,9 @@ Linux 系统核心支持下列策略：
 
 **`MPOL_DEFAULT`：** 根据 memory 区域的默认值来选择分配方式。
 
-<figure>
-  <img src="../../assets/figure-6.15.png" alt="图 6.15：memory 策略阶层结构">
-  <figcaption>图 6.15：memory 策略阶层结构</figcaption>
-</figure>
+![图 6.15：memory 策略阶层结构](../../assets/figure-6.15.png)
+
+*图 6.15：memory 策略阶层结构*
 
 这份清单似乎递回地定义策略。这对了一半。事实上，memory 策略形成一个阶层结构（见图 6.15）。若是一个地址被一个 VMA 策略所涵盖，就会使用这个策略。一种特殊的策略被用在共享的 memory 区段上。假如没有针对特定地址的策略，就会使用任务的策略。若是连这也没有，便使用系统的默认策略。
 
