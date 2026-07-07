@@ -13,4 +13,4 @@
 > 关于繁体中文翻译内容的修正、改进建议，和贡献，请访问 [sysprog21/cpumemory-zhtw](https://github.com/sysprog21/cpumemory-zhtw)
 
 简体转译：[LLQuant](https://github.com/llquant)，使用 GPT 5.5 转译，并使用 Opus 4.8 校验转译结果。  
-[llquant/what-every-programmer-should-know-about-memory](https://github.com/llquant/what-every-programmer-should-know-about-memory.git) 
+项目地址：[llquant/what-every-programmer-should-know-about-memory](https://github.com/llquant/what-every-programmer-should-know-about-memory.git) 
