@@ -1,6 +1,8 @@
 # What Every Programmer Should Know About Memory 译文
 
-本目录收录《What Every Programmer Should Know About Memory》（中文名称：《每个程序员都应该了解的内存知识》）的中文译文，内容覆盖现代商用硬件、CPU cache、虚拟内存、NUMA 支持，以及程序开发者可以采取的内存访问优化方法。
+本目录收录《What Every Programmer Should Know About Memory》（中文名称：《每个程序员都应该了解的内存知识》）的中文译文，内容覆盖现代商用硬件、CPU cache、虚拟内存、NUMA 支持，以及程序员可以采取的内存访问优化方法。
+
+> 本译文对应 2007 年版原文。文中的处理器型号、性能数据、工具参数和部分优化建议保留了当时的硬件背景；应用到现代系统前，请结合当前 CPU、内核、编译器和厂商文档重新验证。
 
 ## 目录
 
@@ -11,7 +13,7 @@
   - [2.2. DRAM 访问技术细节](/resources/cpumemory/commodity-hardware-today/dram-access-technical-details)
   - [2.3. 其他主内存用户](/resources/cpumemory/commodity-hardware-today/other-main-memory-users)
 - [3. CPU cache](/resources/cpumemory/cpu-caches)
-  - [3.1. 概观 CPU cache](/resources/cpumemory/cpu-caches/cpu-caches-in-the-big-picture)
+  - [3.1. CPU cache 全貌](/resources/cpumemory/cpu-caches/cpu-caches-in-the-big-picture)
   - [3.2. 高层 cache 操作](/resources/cpumemory/cpu-caches/cache-operation-at-high-level)
   - [3.3. CPU cache 实现细节](/resources/cpumemory/cpu-caches/cpu-cache-implementation-details)
   - [3.4. 指令 cache](/resources/cpumemory/cpu-caches/instruction-cache)
@@ -26,11 +28,11 @@
   - [5.2. 操作系统对 NUMA 的支持](/resources/cpumemory/numa-support/os-support-for-numa)
   - [5.3. 发布的信息](/resources/cpumemory/numa-support/published-information)
   - [5.4. 远程访问成本](/resources/cpumemory/numa-support/remote-access-costs)
-- [6. 程序开发者能做些什么？](/resources/cpumemory/what-programmers-can-do)
+- [6. 程序员能做些什么？](/resources/cpumemory/what-programmers-can-do)
   - [6.1. 绕过 cache](/resources/cpumemory/what-programmers-can-do/bypassing-the-cache)
   - [6.2. cache 访问](/resources/cpumemory/what-programmers-can-do/cache-access)
   - [6.3. 预取](/resources/cpumemory/what-programmers-can-do/prefetching)
   - [6.4. 多线程优化](/resources/cpumemory/what-programmers-can-do/multi-thread-optimizations)
   - [6.5. NUMA 程序设计](/resources/cpumemory/what-programmers-can-do/numa-programming)
-- [A. 范例与基准测试程序](/resources/cpumemory/examples-and-benchmark-programs)
+- [A. 示例与基准测试程序](/resources/cpumemory/examples-and-benchmark-programs)
 - [参考书目](/resources/cpumemory/bibliography)

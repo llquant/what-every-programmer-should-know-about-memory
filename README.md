@@ -2,6 +2,8 @@
 
 本文翻译自 [Ulrich Drepper](https://de.wikipedia.org/wiki/Ulrich_Drepper) 于 2007 年撰写的论文《[What Every Programmer Should Know About Memory](https://www.akkadia.org/drepper/cpumemory.pdf)》(版次: 1.0)，原文共 114 页。
 
+> 阅读提示：本文保留原文写作时的处理器型号、性能数据和工具环境。涉及具体参数或优化建议时，请先在目标硬件和当前软件版本上复测，不要直接把历史结果作为生产配置基线。
+
 随着 CPU 核心（core）变得更快、数量也更多，内存访问已经成为大多数程序的限制因素，并且在未来一段时间内仍将如此。
 硬件设计者已经提出越来越复杂的内存处理与加速技术，例如 CPU 缓存；但如果没有程序员的配合，这些技术无法发挥最佳效果。
 遗憾的是，对于大多数程序员来说，计算机内存子系统与 CPU 缓存的结构以及使用成本仍然并不清楚。
